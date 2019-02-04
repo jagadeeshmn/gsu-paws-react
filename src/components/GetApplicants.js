@@ -66,9 +66,10 @@ class GetApplicants extends Component{
 
     render(){
         const displayStyle=this.state.showApplications?{}:{display:'none'}
+        const buttonDisplayStyle=this.state.showApplications?{display:'none'}:{}
         return(
            <div>
-               <Button onClick={this.handleClick} className="btn btn-primary">Fetch New Applicants</Button>
+               <Button style={buttonDisplayStyle} onClick={this.handleClick} className="btn btn-primary">Fetch New Applicants</Button>
                <div style={displayStyle}>
                    <Form className="form" onSubmit={this.handleSubmit}>
                         <h1 className="text-center" color="info">List of Applicants</h1>

@@ -1,49 +1,51 @@
 import React,{Component} from "react";
+import {Button} from  "reactstrap";
 
 class HomePage extends Component{
     constructor(props){
         super(props)
         this.state={
-			term:""
+            sid:""
 		}
-		this.handleChange=this.handleChange.bind(this);
-		this.handleSubmit=this.handleSubmit.bind(this);
+        this.handleEnroll = this.handleEnroll.bind(this);
+        this.handleFinances = this.handleFinances.bind(this);
     }
-    handleChange(event){
-		const {name, value} = event.target
-		this.setState({[name]: value})
-	}
+    handleEnroll(event){
 
-	handleSubmit(event){
-		console.log(this.state.term);
 		var self = this;
 		self.props.history.push
            (
              {
-            pathname: '/AddDropCourses',
-            state: {term: this.state.term}
+            pathname: '/semesterselect',
+            state: {sid:this.state.sid}
             }
            );
     }
+    handleFinances(event){
+
+		var self = this;
+		self.props.history.push
+           (
+             {
+            pathname: '/viewfees',
+            state: {sid:this.state.sid}
+            }
+           );
+	}
     
     componentDidMount(){
-        
+        this.setState({
+            sid: this.props.location.state.sid
+          });   
     }
     render(){
         return(
             <div>
                 <h1>Welcome</h1>
                 <div>
-                <form onSubmit={this.handleSubmit}>
-                    <h2>Select Semester</h2>
-                    Select a Semester: <select value={this.state.term} onChange={this.handleChange} name="term">
-                    <option value="">---Select Semester---</option>
-                    <option value="FA">FALL</option>
-                    <option value="SU">SUMMER</option>
-                    <option value="SP">SPRING</option>
-                    </select><br /><br />
-                    <button>Submit</button>
-                </form>	
+                    <Button onClick={this.handleEnroll}>Enrollment</Button>
+                    <br /><br /><br />
+                    <Button onClick={this.handleFinances}>Finances</Button>
                 </div>
             </div>
         )

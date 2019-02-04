@@ -1,6 +1,4 @@
 import React,{Component} from "react";
-import axios from "axios";
-import { Table,Card, CardText, CardBody,CardTitle, CardSubtitle } from 'reactstrap';
 import DepartmentCount from "./DepartmentCount";
 
 class GetApplicants extends Component{
@@ -14,7 +12,7 @@ class GetApplicants extends Component{
 }
     componentDidMount()
     {
-      
+        console.log(this.props);
         this.setState
             (
               {
@@ -23,26 +21,19 @@ class GetApplicants extends Component{
             );
 }
 
-
-
     render(){
        
-       const data = this.props.location.state.data
+       const deptdata = this.props.location.state.data.data;
+       console.log(deptdata);
         return(
            <div>
             <h1 className="text-center" color="info">Statistics</h1>
-            {data.data.map(
-                (application,key)=>
-                <Card>
-                    <CardBody>
-                    <CardTitle className="text-left">Department: {Object.keys(application)[0]}</CardTitle>
-                    <CardSubtitle>Total Count: {application[Object.keys(application)[0]].total_department}</CardSubtitle>
-                    <CardText>
-                        {/* <DepartmentCount item={application[Object.keys(application)[0]]} /> */}
-                        <DepartmentCount item={application} />
-                    </CardText>
-                    </CardBody>
-                </Card>
+            {deptdata.map(
+                (application,key)=><div>
+
+                <DepartmentCount item={application} />
+                <br />
+                </div>
             )
 
             }
